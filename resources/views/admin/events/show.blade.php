@@ -84,7 +84,7 @@
                             {{ trans('cruds.event.fields.active') }}
                         </th>
                         <td>
-                            <input type="checkbox" disabled="disabled" {{ $event->active ? 'checked' : '' }}>
+                            {{ App\Models\Event::ACTIVE_RADIO[$event->active] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

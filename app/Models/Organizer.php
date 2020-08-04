@@ -30,7 +30,6 @@ class Organizer extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'event_id',
         'title',
         'active',
         'created_at',
@@ -54,9 +53,9 @@ class Organizer extends Model implements HasMedia
         return $this->hasMany(Contact::class, 'organizer_id', 'id');
     }
 
-    public function event()
+    public function events()
     {
-        return $this->belongsTo(Event::class, 'event_id');
+        return $this->belongsToMany(Event::class);
     }
 
     public function getLogoAttribute()

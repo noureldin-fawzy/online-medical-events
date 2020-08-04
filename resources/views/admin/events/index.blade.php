@@ -81,6 +81,12 @@
                         <td>
                         </td>
                         <td>
+                            <select class="search" strict="true">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach(App\Models\Event::ACTIVE_RADIO as $key => $item)
+                                    <option value="{{ $key }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
                         </td>
@@ -115,8 +121,7 @@
                                 <input type="checkbox" disabled="disabled" {{ $event->notification ? 'checked' : '' }}>
                             </td>
                             <td>
-                                <span style="display:none">{{ $event->active ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $event->active ? 'checked' : '' }}>
+                                {{ App\Models\Event::ACTIVE_RADIO[$event->active] ?? '' }}
                             </td>
                             <td>
                                 @can('event_show')

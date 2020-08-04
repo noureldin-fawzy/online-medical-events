@@ -38,15 +38,6 @@
                             {{ trans('cruds.contact.fields.email') }}
                         </th>
                         <th>
-                            {{ trans('cruds.contact.fields.whatsapp') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.contact.fields.website') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.contact.fields.address') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.contact.fields.active') }}
                         </th>
                         <th>
@@ -77,15 +68,12 @@
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
+                            <select class="search" strict="true">
+                                <option value>{{ trans('global.all') }}</option>
+                                @foreach(App\Models\Contact::ACTIVE_RADIO as $key => $item)
+                                    <option value="{{ $key }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td>
                         </td>
@@ -113,17 +101,7 @@
                                 {{ $contact->email ?? '' }}
                             </td>
                             <td>
-                                {{ $contact->whatsapp ?? '' }}
-                            </td>
-                            <td>
-                                {{ $contact->website ?? '' }}
-                            </td>
-                            <td>
-                                {{ $contact->address ?? '' }}
-                            </td>
-                            <td>
-                                <span style="display:none">{{ $contact->active ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $contact->active ? 'checked' : '' }}>
+                                {{ App\Models\Contact::ACTIVE_RADIO[$contact->active] ?? '' }}
                             </td>
                             <td>
                                 @can('contact_show')

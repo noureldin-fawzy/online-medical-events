@@ -16,6 +16,11 @@ class Contact extends Model
         'branch',
     ];
 
+    const ACTIVE_RADIO = [
+        '1' => 'active',
+        '0' => 'inactive',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
