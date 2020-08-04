@@ -33,7 +33,7 @@ class OrganizersController extends Controller
     {
         abort_if(Gate::denies('organizer_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $events = Event::all()->pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $events = Event::all()->pluck('title', 'id');
 
         return view('admin.organizers.create', compact('events'));
     }
@@ -41,6 +41,7 @@ class OrganizersController extends Controller
     public function store(StoreOrganizerRequest $request)
     {
         $organizer = Organizer::create($request->all());
+        $organizer->events()->sync($request->input('events', []));
 
         if ($request->input('logo', false)) {
             $organizer->addMedia(storage_path('tmp/uploads/' . $request->input('logo')))->toMediaCollection('logo');
@@ -57,9 +58,9 @@ class OrganizersController extends Controller
     {
         abort_if(Gate::denies('organizer_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $events = Event::all()->pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $events = Event::all()->pluck('title', 'id');
 
-        $organizer->load('event');
+        $organizer->load('events');
 
         return view('admin.organizers.edit', compact('events', 'organizer'));
     }
@@ -67,6 +68,7 @@ class OrganizersController extends Controller
     public function update(UpdateOrganizerRequest $request, Organizer $organizer)
     {
         $organizer->update($request->all());
+        $organizer->events()->sync($request->input('events', []));
 
         if ($request->input('logo', false)) {
             if (!$organizer->logo || $request->input('logo') !== $organizer->logo->file_name) {
@@ -87,7 +89,7 @@ class OrganizersController extends Controller
     {
         abort_if(Gate::denies('organizer_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $organizer->load('event', 'organizerContacts');
+        $organizer->load('events', 'organizerContacts');
 
         return view('admin.organizers.show', compact('organizer'));
     }

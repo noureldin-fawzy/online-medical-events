@@ -28,7 +28,9 @@
                             {{ trans('cruds.organizer.fields.event') }}
                         </th>
                         <td>
-                            {{ $organizer->event->title ?? '' }}
+                            @foreach($organizer->events as $key => $event)
+                                <span class="label label-info">{{ $event->title }}</span>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>

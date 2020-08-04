@@ -76,7 +76,9 @@
                                 {{ $organizer->id ?? '' }}
                             </td>
                             <td>
-                                {{ $organizer->event->title ?? '' }}
+                                @foreach($organizer->events as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
                             </td>
                             <td>
                                 {{ $organizer->title ?? '' }}

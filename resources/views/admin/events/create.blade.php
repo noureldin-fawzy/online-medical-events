@@ -87,11 +87,13 @@
                 <span class="help-block">{{ trans('cruds.event.fields.notification_helper') }}</span>
             </div>
             <div class="form-group">
-                <div class="form-check {{ $errors->has('active') ? 'is-invalid' : '' }}">
-                    <input type="hidden" name="active" value="0">
-                    <input class="form-check-input" type="checkbox" name="active" id="active" value="1" {{ old('active', 0) == 1 || old('active') === null ? 'checked' : '' }}>
-                    <label class="form-check-label" for="active">{{ trans('cruds.event.fields.active') }}</label>
-                </div>
+                <label>{{ trans('cruds.event.fields.active') }}</label>
+                @foreach(App\Models\Event::ACTIVE_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('active') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="active_{{ $key }}" name="active" value="{{ $key }}" {{ old('active', '1') === (string) $key ? 'checked' : '' }}>
+                        <label class="form-check-label" for="active_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
                 @if($errors->has('active'))
                     <div class="invalid-feedback">
                         {{ $errors->first('active') }}

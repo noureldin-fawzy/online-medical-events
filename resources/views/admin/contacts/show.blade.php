@@ -84,7 +84,7 @@
                             {{ trans('cruds.contact.fields.active') }}
                         </th>
                         <td>
-                            <input type="checkbox" disabled="disabled" {{ $contact->active ? 'checked' : '' }}>
+                            {{ App\Models\Contact::ACTIVE_RADIO[$contact->active] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

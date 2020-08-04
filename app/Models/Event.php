@@ -21,6 +21,11 @@ class Event extends Model implements HasMedia
         'title',
     ];
 
+    const ACTIVE_RADIO = [
+        '1' => 'active',
+        '0' => 'inactive',
+    ];
+
     protected $dates = [
         'start_at',
         'end_at',
