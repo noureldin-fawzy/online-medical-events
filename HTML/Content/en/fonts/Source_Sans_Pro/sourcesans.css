@@ -1,0 +1,12 @@
+@font-face {
+	font-family: 'sourcer';
+	src: local('sourcer'), url('FontsFree-Net-greycliff-cf-bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'sourcer';
+	src: local('sourcer'), url('FontsFree-Net-greycliff-cf-heavy.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
