@@ -9,5 +9,26 @@ function myFunction() {
     header.classList.remove("sticky-top-header");
   }
 }
-
-
+jQuery(function() {
+    $(document).ready(function(){
+        $('.owl-speakers').owlCarousel({
+            nav:true,
+            dots:false,
+            autoplay:true,
+            autoplayTimeout:4000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:2
+                },
+                600:{
+                    items:4
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+        });
+			
+});
